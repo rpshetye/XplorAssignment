@@ -32,7 +32,7 @@
           <div class="col-lg-2 form-group">
             <label for="initials">Initials</label>
             <input type="text" class="form-control" name="initials" placeholder="Initials" 
-             [(ngModel)]="data.initials" autocomplete="off" value="{{data.firstname.charAt(0) | uppercase}}." readonly/>            
+             [(ngModel)]="data.initials" autocomplete="off" readonly/>            
           </div>        
         </div>
         <div class="row">            
@@ -40,12 +40,12 @@
                 <label for="firstname">Firstname <span class="text-danger">*</span></label>
                 <input type="text" class="form-control" (keypress)="appCode.charOnly($event)" name="firstname"
                     placeholder="Firstname" [(ngModel)]="data.firstname" value="{{data.firstname | titlecase}}"
-                    autocomplete="off" required/>            
+                    autocomplete="off" (ngModelChange)="modelChangedFirstName($event)" required />            
             </div>            
             <div class="col-lg-4 form-group">
               <label for="firstname_ascii">Firstname ASCII</label>
               <input type="text" class="form-control" name="firstname_ascii" placeholder="Firstname ASCII" 
-               [(ngModel)]="data.firstname_ascii" autocomplete="off" value="{{data.firstname | lowercase}}" readonly/>            
+               [(ngModel)]="data.firstname_ascii" autocomplete="off" readonly/>            
              </div>
               <div class="col-lg-2 form-group">
                 <label for="firstname_country_rank">FC Rank</label>
@@ -64,12 +64,12 @@
                 <label for="lastname">Lastname <span class="text-danger">*</span></label>
                 <input type="text" class="form-control" (keypress)="appCode.charOnly($event)" name="lastname"
                     placeholder="Lastname" [(ngModel)]="data.lastname" value="{{data.lastname | titlecase}}"
-                    autocomplete="off" required/>            
+                    autocomplete="off" (ngModelChange)="modelChangedLastName($event)" required/>            
             </div>
             <div class="col-lg-4 form-group">
                 <label for="lastname_ascii">Lastname ASCII</label>
                 <input type="text" class="form-control" name="lastname_ascii" placeholder="Lastname ASCII" 
-                 [(ngModel)]="data.lastname_ascii" autocomplete="off" value="{{data.lastname | lowercase}}" readonly/>            
+                 [(ngModel)]="data.lastname_ascii" autocomplete="off" readonly/>            
               </div>
               <div class="col-lg-2 form-group">
                 <label for="lastname_country_rank">LC Rank</label>
@@ -112,12 +112,12 @@
           <div class="col-lg-3 form-group">
             <label for="primary_language">Primary Language <span class="text-danger">*</span></label>
             <input type="text" class="form-control" name="primary_language" placeholder="Primary Language" 
-                [(ngModel)]="data.primary_language" autocomplete="off"/>    
+                [(ngModel)]="data.primary_language" autocomplete="off" (ngModelChange)="modelChangedLanguage($event)"/>    
           </div> 
           <div class="col-lg-3 form-group">
             <label for="primary_language_code">Language Code</label>
             <input type="text" class="form-control" name="primary_language_code" placeholder="Primary Language Code" 
-                [(ngModel)]="data.primary_language_code" autocomplete="off" maxlength="3" value="{{data.primary_language.substring(0,2) | lowercase}}"/>    
+                [(ngModel)]="data.primary_language_code" autocomplete="off" maxlength="3" />    
           </div> 
           <div class="col-lg-3 form-group">
             <label for="currency">Currency</label>

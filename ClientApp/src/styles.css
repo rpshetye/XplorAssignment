@@ -72,6 +72,10 @@ button:hover{
 .form-control{
   border-radius: 0;
 }
+input:read-only, input:read-only:focus {
+  background-color: #f0f0f0;
+  cursor: not-allowed;
+}
 /* .ag-row-no-animation .ag-row{
   padding: 5px 0px;
 } */

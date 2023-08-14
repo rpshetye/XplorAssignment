@@ -91,4 +91,17 @@ export class CustomerAddeditComponent implements OnInit  {
     this.router.navigate(['/customer']);
   }
 
+  modelChangedFirstName(newObj:any) {
+    // do something with new value
+    this.data.firstname_ascii = newObj.toLowerCase();
+    this.data.initials = newObj.toUpperCase().substring(0,1);
+  } 
+  modelChangedLastName(newObj:any) {
+    // do something with new value
+    this.data.lastname_ascii = newObj.toLowerCase();
+  } 
+  modelChangedLanguage(newObj:any) {
+    // do something with new value    
+    this.data.primary_language_code =  newObj.toLowerCase().substring(0,2);
+  } 
 }
