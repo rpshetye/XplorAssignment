@@ -1,0 +1,171 @@
+
+<form ngNativeValidate>
+      <div class="page">
+        <div class="page-header">
+          <h3>{{addEditFormName}}</h3>
+        </div>
+      <div>
+        <div class="row">
+          <div class="col-md-2 form-group">
+            <label for="customerId">Id <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" placeholder="Enter Id" name="customerId"
+              #customerId="ngModel" [(ngModel)]="data.id" autocomplete="off" maxlength="4" (keypress)="appCode.numberOnly($event)" required/>            
+          </div>
+          <!-- salutation, initials, firstname, firstname_ascii, firstname_country_rank, firstname_country_frequency -->
+          <div class="col-lg-2 form-group">
+            <label for="gender">Gender <span class="text-danger">*</span></label>
+            <select class="form-control col-lg-12" name="gender" [(ngModel)]="data.gender" required>
+                <option value="">Select</option>
+                <option value="f">Female</option>
+                <option value="m">Male</option>                
+            </select>
+          </div> 
+          <div class="col-lg-2 form-group">
+            <label for="salutation">Salutation <span class="text-danger">*</span></label>
+            <select class="form-control col-lg-12" name="salutation"[(ngModel)]="data.salutation" required>
+                <option value="">Select</option>
+                <option value="Mr.">Mr.</option>
+                <option value="Mrs.">Mrs.</option>
+                <option value="Ms.">Ms.</option>
+            </select>
+          </div> 
+          <div class="col-lg-2 form-group">
+            <label for="initials">Initials</label>
+            <input type="text" class="form-control" name="initials" placeholder="Initials" 
+             [(ngModel)]="data.initials" autocomplete="off" value="{{data.firstname.charAt(0) | uppercase}}." readonly/>            
+          </div>        
+        </div>
+        <div class="row">            
+            <div class="col-lg-4 form-group">
+                <label for="firstname">Firstname <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" (keypress)="appCode.charOnly($event)" name="firstname"
+                    placeholder="Firstname" [(ngModel)]="data.firstname" value="{{data.firstname | titlecase}}"
+                    autocomplete="off" required/>            
+            </div>            
+            <div class="col-lg-4 form-group">
+              <label for="firstname_ascii">Firstname ASCII</label>
+              <input type="text" class="form-control" name="firstname_ascii" placeholder="Firstname ASCII" 
+               [(ngModel)]="data.firstname_ascii" autocomplete="off" value="{{data.firstname | lowercase}}" readonly/>            
+             </div>
+              <div class="col-lg-2 form-group">
+                <label for="firstname_country_rank">FC Rank</label>
+                <input type="text" class="form-control" name="firstname_country_rank" placeholder="Firstname Country Rank" 
+                 [(ngModel)]="data.firstname_country_rank" autocomplete="off" maxlength="5" (keypress)="appCode.numberOnly($event)"/>            
+              </div>
+              <div class="col-lg-2 form-group">
+                <label for="firstname_country_frequency">FC Frequency</label>
+                <input type="text" class="form-control" name="firstname_country_frequency" placeholder="Firstname Country Frequency" 
+                 [(ngModel)]="data.firstname_country_frequency" autocomplete="off" maxlength="5" (keypress)="appCode.numberOnly($event)"/>            
+              </div>
+        </div> 
+        
+        <div class="row">
+            <div class="col-lg-4 form-group">
+                <label for="lastname">Lastname <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" (keypress)="appCode.charOnly($event)" name="lastname"
+                    placeholder="Lastname" [(ngModel)]="data.lastname" value="{{data.lastname | titlecase}}"
+                    autocomplete="off" required/>            
+            </div>
+            <div class="col-lg-4 form-group">
+                <label for="lastname_ascii">Lastname ASCII</label>
+                <input type="text" class="form-control" name="lastname_ascii" placeholder="Lastname ASCII" 
+                 [(ngModel)]="data.lastname_ascii" autocomplete="off" value="{{data.lastname | lowercase}}" readonly/>            
+              </div>
+              <div class="col-lg-2 form-group">
+                <label for="lastname_country_rank">LC Rank</label>
+                <input type="text" class="form-control" name="lastname_country_rank" placeholder="Lastname Country Rank" 
+                 [(ngModel)]="data.lastname_country_rank" autocomplete="off" maxlength="5" (keypress)="appCode.numberOnly($event)"/>            
+              </div>
+              <div class="col-lg-2 form-group">
+                <label for="lastname_country_frequency">LC Frequency</label>
+                <input type="text" class="form-control" name="lastname_country_frequency" placeholder="Lastname Country Frequency" 
+                 [(ngModel)]="data.lastname_country_frequency" autocomplete="off" maxlength="5" (keypress)="appCode.numberOnly($event)"/>            
+              </div>
+        </div>        
+        
+        <div class="row">
+             <div class="col-lg-4 form-group">
+                <label for="country_code_alpha">Country Code Alpha<span class="text-danger">*</span></label>
+                <select class="form-control col-lg-12" name="country_code_alpha" [(ngModel)]="data.country_code_alpha" (change)="onCountryCodeChange($event)">
+                    <option value="">Select</option>                    
+                    <option *ngFor="let c of countries" [value]="c.alpha3">
+                        {{ c.alpha3 }}
+                      </option>              
+                </select>
+              </div>
+              <div class="col-lg-4 form-group">
+                <label for="country_name">Country Name <span class="text-danger">*</span></label>   
+                <select class="form-control col-lg-12" name="country_name" [(ngModel)]="data.country_name" (change)="onCountryNameChange($event)">
+                    <option value="">Select</option>                    
+                    <option *ngFor="let c of countries" [value]="c.name">
+                        {{ c.name }}
+                      </option>              
+                </select>                    
+              </div>
+              <div class="col-lg-4 form-group">
+                <label for="country_code">Country Code</label>
+                <input type="text" class="form-control" name="country_code" placeholder="Country Code" 
+                    [(ngModel)]="data.country_code" autocomplete="off" readonly/>    
+              </div>                          
+        </div> 
+        <div class="row">
+          <div class="col-lg-3 form-group">
+            <label for="primary_language">Primary Language <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" name="primary_language" placeholder="Primary Language" 
+                [(ngModel)]="data.primary_language" autocomplete="off"/>    
+          </div> 
+          <div class="col-lg-3 form-group">
+            <label for="primary_language_code">Language Code</label>
+            <input type="text" class="form-control" name="primary_language_code" placeholder="Primary Language Code" 
+                [(ngModel)]="data.primary_language_code" autocomplete="off" maxlength="3" value="{{data.primary_language.substring(0,2) | lowercase}}"/>    
+          </div> 
+          <div class="col-lg-3 form-group">
+            <label for="currency">Currency</label>
+            <input type="text" class="form-control" name="currency" placeholder="currency" 
+                [(ngModel)]="data.currency" autocomplete="off" readonly/>    
+          </div> 
+          <div class="col-lg-3 form-group">
+            <label for="balance">Balance<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" name="balance" placeholder="Balance"             
+                [(ngModel)]="data.balance" autocomplete="off" style="text-align: right;" maxlength="10" (keypress)="appCode.allowOnlyNumberAndDecimals($event)"/>    
+          </div>  
+        </div>        
+        <div class="row">
+          <div class="col-lg-6 form-group">
+            <label for="email">Email <span class="text-danger">*</span></label>
+            <input type="email" class="form-control" name="email" placeholder="email" 
+                [(ngModel)]="data.email" autocomplete="off" required/>    
+          </div> 
+          <div class="col-lg-6 form-group">
+            <label for="password">Password <span class="text-danger">*</span></label>
+            <input type="password" class="form-control" name="password" placeholder="password" 
+                [(ngModel)]="data.password" autocomplete="off" required/>    
+          </div>  
+        </div>  
+        <div class="row">
+          <div class="col-lg-6 form-group">
+            <label for="phone_Number">Phone Number <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" name="phone_Number" placeholder="Phone Number" 
+                [(ngModel)]="data.phone_Number" autocomplete="off" maxlength="15" minlength="15" required/>    
+          </div>           
+        </div>  
+      </div>
+        <!-- Footer Section -->
+      <div class="page-footer">        
+        <div class="row">        
+            <div class="col-md-4">
+              <button type="button" class="btn btn-info col-form-label" (click)="onClearForm()" data-toggle="tooltip"
+                data-placement="bottom" title="CLEAR">CLEAR</button>
+            </div>
+            <div class="col-md-4">
+              <button class="btn btn-danger" (click)="onSubmitForm()" data-placement="bottom" title="SUBMIT"> {{savebtnName}}
+              </button>
+            </div>
+            <div class="col-md-4">
+              <button type="button" class="btn btn-secondary col-form-label" data-placement="bottom" (click)="onCancel()"
+                title="CANCEL">CANCEL</button>
+            </div>        
+        </div>        
+      </div> 
+  </div>
+</form>
